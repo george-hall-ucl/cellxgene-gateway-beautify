@@ -19,7 +19,6 @@ def render_annotations(item, item_source):
     url = flask_util.view_url(
         item_source.get_annotations_subpath(item), item_source.name
     )
-    new_annotation = f"<a class='new' href='{url}'>new</a>"
     annotations = (
         ", ".join(
             [
@@ -27,15 +26,19 @@ def render_annotations(item, item_source):
                 for a in item.annotations
             ]
         )
-        + ", "
-        if item.annotations
-        else ""
     )
-    return " | annotations: " + annotations + new_annotation
+
+    return annotations
+
+def render_new_annotations(item, item_source):
+    url = flask_util.view_url(
+        item_source.get_annotations_subpath(item), item_source.name
+    )
+    return f"<a class='new' href='{url}'>Create new annotation set</a>"
 
 
 def render_item(item, item_source):
-    item_string = f"<li> <a href='{ CacheKey(item, item_source).view_url }/'>{item.name}</a> {render_annotations(item, item_source)}</li>"
+    item_string = f"<tr> <td>{item.name}</td> <td><a href='{ CacheKey(item, item_source).view_url }/'>View without annotations</a></td> <td>{render_new_annotations(item, item_source)}</td> <td>{render_annotations(item, item_source)}</td></tr>"
     return item_string
 
 
@@ -45,6 +48,7 @@ def render_item_tree(item_tree, item_source):
         if item_tree.items
         else ""
     )
+    items = '<div class="table-wrapper"><table class="fl-table"><thead><tr><th width="10%">Dataset</th><th width="10%">🙈</th><th width="10%">✍️</th><th>Saved annotations</th></tr></thead><tbody>' + items + "</tbody></table></div>"
     branches = (
         "\n".join([render_item_tree(b, item_source) for b in item_tree.branches])
         if item_tree.branches
@@ -64,4 +68,4 @@ def render_item_source(item_source, filter=None):
     item_tree = item_source.list_items(filter)
     filterpart = "" if filter is None else ":" + filter
     heading = f"<h6><a href='/filecrawl.html?source={urllib.parse.quote_plus(item_source.name)}'>{item_source.name}</a>{filterpart}</h6>"
-    return heading + render_item_tree(item_tree, item_source)
+    return render_item_tree(item_tree, item_source)

@@ -22,7 +22,8 @@ def render_annotations(item, item_source):
     annotations = (
         ", ".join(
             [
-                f"<a href='{CacheKey(item, item_source, a).view_url}/'>{a.name}</a>"
+                f"<a href='{CacheKey(item, item_source, a).view_url}/' "\
+                f"target='_blank' rel='noopener noreferrer'>{a.name}</a>"
                 for a in item.annotations
             ]
         )
@@ -38,7 +39,14 @@ def render_new_annotations(item, item_source):
 
 
 def render_item(item, item_source):
-    item_string = f"<tr> <td>{item.name}</td> <td><a href='{ CacheKey(item, item_source).view_url }/'>View without annotations</a></td> <td>{render_new_annotations(item, item_source)}</td> <td>{render_annotations(item, item_source)}</td></tr>"
+    item_string = "<tr>"\
+            f"<td>{item.name}</td>"\
+            f"<td><a href='{ CacheKey(item, item_source).view_url }/' "\
+             "target='_blank' rel='noopener noreferrer'>"\
+             "View without annotations</a></td>"\
+            f"<td>{render_new_annotations(item, item_source)}</td>"\
+            f"<td>{render_annotations(item, item_source)}</td>"\
+             "</tr>"
     return item_string
 
 

@@ -1,0 +1,27 @@
+/* Modified version of "Responsive Table HTML and CSS Only"
+ * (https://codepen.io/florantara/pen/dROvdb). Copyright Flor Antara 2023 and
+ * licensed under the MIT license (available
+ * https://blog.codepen.io/documentation/licensing/)
+ */
+
+*{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+body{
+    font-family: Helvetica;
+    -webkit-font-smoothing: antialiased;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+h2{
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}

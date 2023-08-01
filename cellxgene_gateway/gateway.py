@@ -10,6 +10,7 @@
 import json
 import logging
 import os
+import glob
 import urllib.parse
 from threading import Lock, Thread
 
@@ -147,11 +148,19 @@ def filecrawl(path=None):
         if source_name
         else item_sources
     )
+
     # loop all data sources --
     rendered_sources = [
         render_item_source(item_source, path) for item_source in sources
     ]  # will we need to make this async in the page???
     rendered_html = "\n".join(rendered_sources)
+
+    all_nbs = glob.glob(env.cellxgene_data + "/rendered_notebooks/*.html")
+    nb_links = [f"<a href=file:///{x}>{os.path.basename(x)}</a>" for x in all_nbs]
+    rendered_html += " ".join(["The following notebooks are available.",
+                               "To open: right click -> copy link -> open a",
+                               "new tab -> paste link.<br>"]) + \
+                                       "<br>".join(nb_links) + "<br><br>"
 
     resp = make_response(
         render_template(

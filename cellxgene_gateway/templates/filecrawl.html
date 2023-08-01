@@ -47,5 +47,63 @@
                $("a.new").click(new_annotation_callback);
           })
      </script>
+
+    <details>
+     <summary>Licensing information</summary>
+
+     <br>
+     <p>
+     Portable-CELLxGENE is licensed under the GPL-3.0, available
+     <a href = https://www.gnu.org/licenses/gpl-3.0.en.html>here</a>.
+     It is copyright University College London 2023.
+     <br><br>
+     Portable-CELLxGENE contains executable versions of many other pieces
+     of software. To ensure compliance with all relevant licensing terms,
+     we list the copyrights and licenses of each component in the table
+     below.
+     <br>
+     Note that if copyright is listed as "Unspecified" then this means that it
+     was not made clear in the source code repository. "TBA" means that we were
+     unable to locate the information.
+
+     <script src={{ url_for('static', filename='js/licenses.js') }}></script>
+     <div class="table-wrapper">
+        <table style="text-align: center; border:1px solid">
+            <thead>
+                <tr style="background: #CFCFCF">
+                    <th width="15%">Software</th>
+                    <th width="55%">Copyright</th>
+                    <th width="15%">License</th>
+                    <th width="15%">Source code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <script>
+                     for (let i = 0; i < licenses.length; i++) {
+                         document.write('<tr>');
+                         document.write('<td> <a href=' + licenses[i][1]);
+                         document.write(' target="_blank" rel="noopener noreferrer">');
+                         document.write(licenses[i][0] + '</td>');
+                         document.write('<td style="text-align: left">' + licenses[i][2] + '</td>');
+                         document.write('<td>')
+                         for (let j = 0; j < licenses[i][3].length; j++) {
+                             document.write('<a href=' + licenses_urls[licenses[i][3][j]]);
+                             document.write(' target="_blank" rel="noopener noreferrer">');
+                             document.write(licenses[i][3][j] + '</a>');
+
+                             if ((licenses[i][3].length > 1) && (j < licenses[i][3].length - 1)) {
+                                document.write(' and ')
+                             }
+                         }
+                         document.write('</td>')
+                         document.write('<td><a href=' + licenses[i][4]);
+                         document.write(' target="_blank" rel="noopener noreferrer" style="text-decoration:none">🔗</a></td>');
+                         document.write('</tr>\n');
+                      }
+                </script>
+            </tbody>
+        </table>
+     </div>
+    </details>
 </body>
 </html>

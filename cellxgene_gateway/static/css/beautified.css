@@ -12,10 +12,11 @@
 body{
     font-family: Helvetica;
     -webkit-font-smoothing: antialiased;
-    margin-left: 30%;
-    margin-right: 30%;
+    margin-left: 20%;
+    margin-right: 20%;
     margin-top: 10px;
     margin-bottom: 10px;
+    background-color:#FFFCF5;
 }
 h2{
     text-align: center;
@@ -24,4 +25,33 @@ h2{
     letter-spacing: 1px;
     color: white;
     padding: 30px 0;
+}
+.subpage {
+    background: #FFF7F3;
+    padding-right:10px;
+    padding-left:10px;
+    padding-top:10px;
+    padding-bottom:5px;
+    border-radius:5px;
+    box-shadow:0px 0px 20px #D3D3D3;
+}
+
+.same-line {
+    height: 10px; /*childrens it's all absolute position, so must set height*/
+    position: relative;
+}
+.same-line div{
+    display: inline-block;
+    position: absolute;
+}
+.on-the-left{
+ left:0px;
+}
+.on-the-center{
+    left: 0%;
+    right: 0%;
+    text-align: center;
+}
+.on-the-right{
+   right: 0px;
 }

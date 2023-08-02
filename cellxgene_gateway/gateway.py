@@ -121,6 +121,14 @@ def handle_invalid_process(error):
 def favicon():
     return send_from_directory(
         os.path.join(app.root_path, "static"),
+        "favicon.ico",
+        mimetype="image/vnd.microsof.icon",
+    )
+
+@app.route("/nibr.ico")
+def favicon_nibr():
+    return send_from_directory(
+        os.path.join(app.root_path, "static"),
         "nibr.ico",
         mimetype="image/vnd.microsof.icon",
     )

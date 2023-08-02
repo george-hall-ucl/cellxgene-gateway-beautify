@@ -157,18 +157,24 @@ def filecrawl(path=None):
         else item_sources
     )
 
+    rendered_html = "<div class='subpage'><p><center><h5><b><u>Datasets</u></b></h5></center></p>"
+
     # loop all data sources --
     rendered_sources = [
         render_item_source(item_source, path) for item_source in sources
     ]  # will we need to make this async in the page???
-    rendered_html = "\n".join(rendered_sources)
+    rendered_html += "\n".join(rendered_sources)
+    rendered_html += "</div>\n<br><div class='subpage'>"
 
     all_nbs = glob.glob(env.cellxgene_data + "/rendered_notebooks/*.html")
-    nb_links = [f"<a href=file:///{x}>{os.path.basename(x)}</a>" for x in all_nbs]
-    rendered_html += " ".join(["The following notebooks are available.",
-                               "To open: right click -> copy link -> open a",
-                               "new tab -> paste link.<br>"]) + \
-                                       "<br>".join(nb_links) + "<br><br>"
+    if all_nbs:
+        nb_links = [f"<a href=file:///{x}>{os.path.basename(x)}</a>" for x in all_nbs]
+        rendered_html += "<p><center><h5><b><u>Notebooks</u></b></h5></p>" + \
+                         "(right click → copy link → open a " + \
+                         "new tab → paste link)<br> <div class='table-wrapper'><table class='fl-table'>" + \
+                         "<thead><th>Notebook</th></thead><tbody>" + \
+                         "".join([f"<tr><td>{x}</td></tr>" for x in (nb_links + nb_links)]) + \
+                         "</tbody></table></div></center></div><br>"
 
     resp = make_response(
         render_template(

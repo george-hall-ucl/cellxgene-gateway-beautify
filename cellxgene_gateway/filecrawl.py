@@ -35,7 +35,7 @@ def render_new_annotations(item, item_source):
     url = flask_util.view_url(
         item_source.get_annotations_subpath(item), item_source.name
     )
-    return f"<a class='new' href='{url}'>Create new annotation set</a>"
+    return f"<a class='new' href='{url}'>Create annotations</a>"
 
 
 def render_item(item, item_source):
@@ -43,7 +43,7 @@ def render_item(item, item_source):
             f"<td>{item.name}</td>"\
             f"<td><a href='{ CacheKey(item, item_source).view_url }/' "\
              "target='_blank' rel='noopener noreferrer'>"\
-             "View without annotations</a></td>"\
+             "No annotations</a></td>"\
             f"<td>{render_new_annotations(item, item_source)}</td>"\
             f"<td>{render_annotations(item, item_source)}</td>"\
              "</tr>"
@@ -56,13 +56,22 @@ def render_item_tree(item_tree, item_source):
         if item_tree.items
         else ""
     )
-    items = '<div class="table-wrapper"><table class="fl-table"><thead><tr><th width="10%">Dataset</th><th width="10%">🙈</th><th width="10%">✍️</th><th>Saved annotations</th></tr></thead><tbody>' + items + "</tbody></table></div>"
+    items = '<div class="table-wrapper">'\
+            '<table class="fl-table">'\
+            '<thead>'\
+            '<tr><th width="10%">Dataset</th><th width="10%">🙈</th>'\
+            '<th width="10%">✍️</th>'\
+            '<th>Saved annotations</th></tr>'\
+            '</thead>'\
+            '<tbody>' +\
+            items +\
+            '</tbody></table></div>'
     branches = (
         "\n".join([render_item_tree(b, item_source) for b in item_tree.branches])
         if item_tree.branches
         else ""
     )
-    html = "<ul>" + items + branches + "</ul>"
+    html = items + branches
     if item_tree.descriptor:
         descriptor = item_tree.descriptor.lstrip("/")
         url = f"/filecrawl/{descriptor}?source={item_source.name}"

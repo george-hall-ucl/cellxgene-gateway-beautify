@@ -24,23 +24,54 @@
 
 </head>
 <body>
-     <h4>Portable-CELLxGENE</h4>
-
-     Click on a dataset to load it.
+    <!-- <div style="background-color:#DBF1FF; border:5px solid #BBFFE5; padding-left:10px; padding-right:10px; padding-top: 10px; margin-top:-20px;"> -->
+    <div class="subpage" style="padding-left:20px; padding-right:20px; padding-top:25px; margin-top:-25px; background-color:#FFE3E2;">
+        <h4 style="text-align:left;float:left"><b>Portable-CELLxGENE</b></h4>
+    <h6 style="text-align:right;float:right">help: <a style="color: inherit" href="https://github.com/george-hall-ucl/portable-cellxgene" target="_blank" rel="noopener noreferrer">github.com/george-hall-ucl/portable-cellxgene</a></h6>
+    <hr style="clear:both; border-width:0px;"/>
+    </div>
+    <br>
 
      {{ rendered_html|safe }}
 
-     Each dataset can be loaded without any custom annotations or gene sets
-     (and without the ability to save them); without any annotatation or gene
-     sets (with the ability to create new ones); or with a saved annotations
-     file.
+     <div class="subpage">
+     <p>
+     <center><h5><b><u>Instructions</u></b></h5></center>
+     <u>Loading datasets</u><br>
+     Datasets can be loaded in three ways:
+     <ul>
+         <li>🙈: Without annotations (and without the ability to create them).</li>
+         <li>✍️: Without annotations (with the ability to create them)</li>
+         <li>With existing annotations</li>
+     </ul>
+
+     <u>Saving annotations</u><br>
+     Clicking "Create annotations" will trigger a pop-up text box allowing you
+     to enter a name for the annotation files. If needed, a folder with the
+     name of the dataset plus "_annotations" will be created in the directory
+     containing the dataset's .h5ad file. Cell-level annotations and gene-level
+     gene sets will be saved in this folder as "[ENTERED_NAME].csv" and
+     "[ENTERED_NAME]_gene_sets.csv", respectively. These files are saved
+     automatically by CELLxGENE.
+
+     <br><br><u>Transporting annotations</u><br>
+     Since the annotation and gene sets files are CSVs, they are simple
+     to transfer between users and datasets. Simply create a new folder in the
+     same directory as your data (if needed), then copy the desired CSV files
+     to this new directory. They will be detected by Portable-CELLxGENE (may
+     have to be restarted).
+
+     </p>
+     </div>
 
      <p>
      {% if path %}
      <li><a href="{{ url_for('filecrawl') }}">top level</a></li>
      {% else %}
      {% endif %}
-     <a href="{{ url_for('do_GET_status') }}">View running sessions</a>
+     <div class="subpage">
+     <a href="{{ url_for('do_GET_status') }}" target="_blank" rel="noopener noreferrer">View running sessions</a>
+     </div>
      </p>
      <script>
           $(() => {
@@ -48,11 +79,12 @@
           })
      </script>
 
-    <details>
+     <div class="subpage">
+     <details>
      <summary>Licensing information</summary>
 
-     <br>
      <p>
+     <center><h5>Licensing</h5></center>
      Portable-CELLxGENE is licensed under the GPL-3.0, available
      <a href = https://www.gnu.org/licenses/gpl-3.0.en.html>here</a>.
      It is copyright University College London 2023.
@@ -63,16 +95,16 @@
      below.
      <br>
      Note that if copyright is listed as "Unspecified" then this means that it
-     was not made clear in the source code repository. "TBA" means that we were
-     unable to locate the information.
+     was not made clear in the source code.
 
      <script src={{ url_for('static', filename='js/licenses.js') }}></script>
+     <center>
      <div class="table-wrapper">
-        <table style="text-align: center; border:1px solid">
+        <table class='fl-table'>
             <thead>
                 <tr style="background: #CFCFCF">
-                    <th width="15%">Software</th>
-                    <th width="55%">Copyright</th>
+                    <th width="20%">Software</th>
+                    <th width="50%">Copyright</th>
                     <th width="15%">License</th>
                     <th width="15%">Source code</th>
                 </tr>
@@ -92,7 +124,7 @@
                              document.write(licenses[i][3][j] + '</a>');
 
                              if ((licenses[i][3].length > 1) && (j < licenses[i][3].length - 1)) {
-                                document.write(' and ')
+                                 document.write(' <br> ')
                              }
                          }
                          document.write('</td>')
@@ -105,5 +137,16 @@
         </table>
      </div>
     </details>
+     </div>
+
+     <br>
+     <footer style="margin-bottom:-50px;">
+         <div class="subpage" style="height:50px">
+         <div class="same-line">
+             <div class="on-the-left">© University College London 2023-</div>
+             <div class="on-the-right"><a style="color: inherit" href="https://github.com/george-hall-ucl/portable-cellxgene" target="_blank" rel="noopener noreferrer">github.com/george-hall-ucl/portable-cellxgene</a></div>
+         </div>
+         </div>
+     </footer>
 </body>
 </html>

@@ -50,7 +50,7 @@ const licenses = [
     ["scipy", "https://pypi.org/project/scipy/", "Enthought, Inc (2001-2002); SciPy Developers (2003-2023)", ["BSD-3-Clause"], "https://github.com/scipy/scipy"],
     ["setuptools", "https://pypi.org/project/setuptools/", "Donald Stufft and individual contributors (2014-2019)", ["MIT"], "https://github.com/pypa/setuptools"],
     ["six", "https://pypi.org/project/six/", "Benjamin Peterson (2010-2020)", ["MIT"], "https://github.com/benjaminp/six"],
-    ["sqlite", "sqlite.org/index.html", "None (public domain)", ["None (blessing)"], "https://sqlite.org/src/dir?ci=trunk"],
+    ["sqlite", "https://sqlite.org/index.html", "None (public domain)", ["None (blessing)"], "https://sqlite.org/src/dir?ci=trunk"],
     ["tk", "https://www.tcl.tk/software/tcltk/", "Regents of the University of California, Sun Microsystems, Inc., Scriptics Corporation, and other parties", ["TCL"], "https://github.com/tcltk/tk"],
     ["typing-extensions", "https://pypi.org/project/typing-extensions/", "Python Software Foundation (2001-)", ["PSF-2.0"], "https://github.com/python/typing_extensions"],
     ["urllib3", "https://pypi.org/project/urllib3/", "Andrey Petrov and contributors (2008-2020)", ["MIT"], "https://github.com/urllib3/urllib3"],

@@ -25,10 +25,19 @@
 </head>
 <body>
     <!-- <div style="background-color:#DBF1FF; border:5px solid #BBFFE5; padding-left:10px; padding-right:10px; padding-top: 10px; margin-top:-20px;"> -->
-    <div class="subpage" style="padding-left:20px; padding-right:20px; padding-top:25px; margin-top:-25px; background-color:#FFE3E2;">
-        <h4 style="text-align:left;float:left"><b>Portable-CELLxGENE</b></h4>
-    <h6 style="text-align:right;float:right">help: <a style="color: inherit" href="https://github.com/george-hall-ucl/portable-cellxgene" target="_blank" rel="noopener noreferrer">github.com/george-hall-ucl/portable-cellxgene</a></h6>
+    <div class="subpage" style="padding-left:20px; padding-right:20px; padding-top:25px; margin-top:-25px; margin-left:5%; margin-right:5%; background-color:#FFD761; border:2px solid black;">
+        <center>
+        <h4><b>Portable-CELLxGENE</b></h4><br>
+        <h6 style="margin-top:-20px;">
+        Easy sharing of datasets.
+        <a style="color: inherit"
+           href="https://github.com/george-hall-ucl/portable-cellxgene"
+           target="_blank"
+           rel="noopener noreferrer">
+            github.com/george-hall-ucl/portable-cellxgene</a>.
+        </h6>
     <hr style="clear:both; border-width:0px;"/>
+        </center>
     </div>
     <br>
 
@@ -36,30 +45,33 @@
 
      <div class="subpage">
      <p>
-     <center><h5><b><u>Instructions</u></b></h5></center>
-     <u>Loading datasets</u><br>
-     Datasets can be loaded in three ways:
+     <center><h5><b>Instructions</b></h5></center>
+     <b>Loading datasets</b>
+     <br>
      <ul>
          <li>🙈: Without annotations (and without the ability to create them).</li>
-         <li>✍️: Without annotations (with the ability to create them)</li>
-         <li>With existing annotations</li>
+         <li>✍️: Without annotations (with the ability to create them - see "Saving annotations")</li>
+         <li>💾: With existing annotations</li>
      </ul>
 
-     <u>Saving annotations</u><br>
-     Clicking "Create annotations" will trigger a pop-up text box allowing you
-     to enter a name for the annotation files. If needed, a folder with the
-     name of the dataset plus "_annotations" will be created in the directory
-     containing the dataset's .h5ad file. Cell-level annotations and gene-level
-     gene sets will be saved in this folder as "[ENTERED_NAME].csv" and
-     "[ENTERED_NAME]_gene_sets.csv", respectively. These files are saved
-     automatically by CELLxGENE.
+     <b>Saving annotations</b>
+     <br>
+     <ul>
+         <li>Click "Create annotations" and enter a name for the annotation files</li>
+         <li>Cell-level annotations will be saved at
+             <samp>[DATASET_NAME]/[ENTERED_NAME].csv</samp></li>
+         <li>Gene-level gene sets will be saved at
+             <samp>[DATASET_NAME]/[ENTERED_NAME]_gene_sets.csv</samp></li>
+         <li>Note: These files are saved automatically. Old versions are saved at folders ending with <samp>-backups</samp></li>
+     </ul>
 
-     <br><br><u>Transporting annotations</u><br>
-     Since the annotation and gene sets files are CSVs, they are simple
-     to transfer between users and datasets. Simply create a new folder in the
-     same directory as your data (if needed), then copy the desired CSV files
-     to this new directory. They will be detected by Portable-CELLxGENE (may
-     have to be restarted).
+     <b>Sharing annotations</b>
+     <br>
+     <ul>
+         <li>Create new folder with dataset's name (if necessary)</li>
+         <li>Copy desired CSV files to the new directory</li>
+         <li>They will be detected by CELLxGENE (restart may be required)</li>
+     </ul>
 
      </p>
      </div>
@@ -81,10 +93,9 @@
 
      <div class="subpage">
      <details>
-     <summary>Licensing information</summary>
+     <summary style="font-size: 1.25rem;text-align: center;font-weight: bold;">Licensing</summary>
 
      <p>
-     <center><h5>Licensing</h5></center>
      Portable-CELLxGENE is licensed under the GPL-3.0, available
      <a href = https://www.gnu.org/licenses/gpl-3.0.en.html>here</a>.
      It is copyright University College London 2023.
@@ -141,12 +152,21 @@
 
      <br>
      <footer style="margin-bottom:-50px;">
+         <small>
          <div class="subpage" style="height:50px">
          <div class="same-line">
              <div class="on-the-left">© University College London 2023-</div>
-             <div class="on-the-right"><a style="color: inherit" href="https://github.com/george-hall-ucl/portable-cellxgene" target="_blank" rel="noopener noreferrer">github.com/george-hall-ucl/portable-cellxgene</a></div>
+             <div class="on-the-right">
+                 <a style="color: inherit"
+                     href="https://github.com/george-hall-ucl/portable-cellxgene"
+                     target="_blank"
+                     rel="noopener noreferrer">
+                        github.com/george-hall-ucl/portable-cellxgene
+                 </a>
+             </div>
          </div>
          </div>
+         </small>
      </footer>
 </body>
 </html>

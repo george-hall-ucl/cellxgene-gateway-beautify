@@ -157,7 +157,7 @@ def filecrawl(path=None):
         else item_sources
     )
 
-    rendered_html = "<div class='subpage'><p><center><h5><b><u>Datasets</u></b></h5></center></p>"
+    rendered_html = "<div class='subpage'><p><center><h5><b>Datasets</b></h5></center></p>"
 
     # loop all data sources --
     rendered_sources = [
@@ -169,10 +169,10 @@ def filecrawl(path=None):
     all_nbs = glob.glob(env.cellxgene_data + "/rendered_notebooks/*.html")
     if all_nbs:
         nb_links = [f"<a href=file:///{x}>{os.path.basename(x)}</a>" for x in all_nbs]
-        rendered_html += "<p><center><h5><b><u>Notebooks</u></b></h5></p>" + \
+        rendered_html += "<p><center><h5><b>Notebooks</b></h5></p>" + \
                          "(right click → copy link → open a " + \
                          "new tab → paste link)<br> <div class='table-wrapper'><table class='fl-table'>" + \
-                         "<thead><th>Notebook</th></thead><tbody>" + \
+                         "<thead><th>📖</th></thead><tbody>" + \
                          "".join([f"<tr><td>{x}</td></tr>" for x in (nb_links + nb_links)]) + \
                          "</tbody></table></div></center></div><br>"
 

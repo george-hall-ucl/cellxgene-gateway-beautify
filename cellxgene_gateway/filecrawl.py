@@ -59,9 +59,9 @@ def render_item_tree(item_tree, item_source):
     items = '<div class="table-wrapper">'\
             '<table class="fl-table">'\
             '<thead>'\
-            '<tr><th width="10%">Dataset</th><th width="10%">🙈</th>'\
+            '<tr><th width="10%"></th><th width="10%">🙈</th>'\
             '<th width="10%">✍️</th>'\
-            '<th>Saved annotations</th></tr>'\
+            '<th>💾</th></tr>'\
             '</thead>'\
             '<tbody>' +\
             items +\

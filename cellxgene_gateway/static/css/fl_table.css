@@ -28,9 +28,12 @@
     padding: 8px;
 }
 
+.fl-table thead {
+    font-size: large;
+}
 
 .fl-table thead th {
-    background: #FFFCF2;
+    background: #FFF4CF;
 }
 
 
@@ -41,7 +44,9 @@
 .fl-table tr:nth-child(even) {
     background: #F8F8F8;
 
-}/* Responsive */
+}
+
+/* Responsive */
 
 @media (max-width: 800px) {
     .fl-table {

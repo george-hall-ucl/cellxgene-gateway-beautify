@@ -1,0 +1,172 @@
+<!--
+ Copyright 2019 Novartis Institutes for BioMedical Research Inc. Licensed
+ under the Apache License, Version 2.0 (the "License"); you may not use
+ this file except in compliance with the License. You may obtain a copy
+ of the License at http://www.apache.org/licenses/LICENSE-2.0. Unless
+ required by applicable law or agreed to in writing, software distributed
+ under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+ OR CONDITIONS OF ANY KIND, either express or implied. See the License for
+ the specific language governing permissions and limitations under the License.
+-->
+
+<html>
+<head>
+     <title>Portable-CELLxGENE | Datasets</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+	{% for script in extra_scripts %}
+	<script src="{{ script }}"></script>
+     {% endfor %}
+     <script src="{{ url_for('static', filename='js/annotation.js') }}"></script>
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap_min.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/fl_table.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/beautified.css') }}">
+
+</head>
+<body>
+    <!-- <div style="background-color:#DBF1FF; border:5px solid #BBFFE5; padding-left:10px; padding-right:10px; padding-top: 10px; margin-top:-20px;"> -->
+    <div class="subpage" style="padding-left:20px; padding-right:20px; padding-top:25px; margin-top:-25px; margin-left:5%; margin-right:5%; background-color:#FFE780; border:2px solid black;">
+        <center>
+        <h4><b>Portable-CELLxGENE</b></h4><br>
+        <h6 style="margin-top:-20px;">
+        Easy sharing of datasets.
+        <a style="color: inherit"
+           href="https://github.com/george-hall-ucl/portable-cellxgene"
+           target="_blank"
+           rel="noopener noreferrer">
+            github.com/george-hall-ucl/portable-cellxgene</a>.
+        </h6>
+    <hr style="clear:both; border-width:0px;"/>
+        </center>
+    </div>
+    <br>
+
+     {{ rendered_html|safe }}
+
+     <div class="subpage">
+     <p>
+     <center><h5><b>Instructions</b></h5></center>
+     <b>Loading datasets</b>
+     <br>
+     <ul>
+         <li>🙈: Without annotations (and unable to save new ones)</li>
+         <li>✍️: Create new annotations</li>
+         <li>💾: Load existing annotations</li>
+     </ul>
+
+     <b>Saving annotations</b>
+     <br>
+     <ul>
+         <li>Click "Create annotations" and enter a name for the annotation files</li>
+         <li>Cell-level annotations will be saved at
+             <samp>[DATASET_NAME]/[ENTERED_NAME].csv</samp></li>
+         <li>Gene-level gene sets will be saved at
+             <samp>[DATASET_NAME]/[ENTERED_NAME]_gene_sets.csv</samp></li>
+         <li>Note: These files are saved automatically. Old versions are saved at folders ending with <samp>-backups</samp></li>
+     </ul>
+
+     <b>Sharing annotations</b>
+     <br>
+     <ul>
+         <li>Create new folder with dataset's name (if necessary)</li>
+         <li>Copy desired CSV files to the new directory</li>
+         <li>They will be detected by CELLxGENE (restart may be required)</li>
+     </ul>
+
+     </p>
+     </div>
+
+     <p>
+     {% if path %}
+     <li><a href="{{ url_for('filecrawl') }}">top level</a></li>
+     {% else %}
+     {% endif %}
+     <div class="subpage">
+     <a href="{{ url_for('do_GET_status') }}" target="_blank" rel="noopener noreferrer">View running sessions</a>
+     </div>
+     </p>
+     <script>
+          $(() => {
+               $("a.new").click(new_annotation_callback);
+          })
+     </script>
+
+     <div class="subpage">
+     <details>
+     <summary style="font-size: 1.25rem;text-align: center;font-weight: bold;">Licensing</summary>
+
+     <p>
+     Portable-CELLxGENE is licensed under the GPL-3.0, available
+     <a href = https://www.gnu.org/licenses/gpl-3.0.en.html>here</a>.
+     It is copyright University College London 2023.
+     <br><br>
+     Portable-CELLxGENE contains executable versions of many other pieces
+     of software. To ensure compliance with all relevant licensing terms,
+     we list the copyrights and licenses of each component in the table
+     below.
+     <br>
+     Note that if copyright is listed as "Unspecified" then this means that it
+     was not made clear in the source code.
+
+     <script src={{ url_for('static', filename='js/licenses.js') }}></script>
+     <center>
+     <div class="table-wrapper">
+        <table class='fl-table'>
+            <thead>
+                <tr style="background: #CFCFCF">
+                    <th width="20%">Software</th>
+                    <th width="50%">Copyright</th>
+                    <th width="15%">License</th>
+                    <th width="15%">Source code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <script>
+                     for (let i = 0; i < licenses.length; i++) {
+                         document.write('<tr>');
+                         document.write('<td> <a href=' + licenses[i][1]);
+                         document.write(' target="_blank" rel="noopener noreferrer">');
+                         document.write(licenses[i][0] + '</td>');
+                         document.write('<td style="text-align: left">' + licenses[i][2] + '</td>');
+                         document.write('<td>')
+                         for (let j = 0; j < licenses[i][3].length; j++) {
+                             document.write('<a href=' + licenses_urls[licenses[i][3][j]]);
+                             document.write(' target="_blank" rel="noopener noreferrer">');
+                             document.write(licenses[i][3][j] + '</a>');
+
+                             if ((licenses[i][3].length > 1) && (j < licenses[i][3].length - 1)) {
+                                 document.write(' <br> ')
+                             }
+                         }
+                         document.write('</td>')
+                         document.write('<td><a href=' + licenses[i][4]);
+                         document.write(' target="_blank" rel="noopener noreferrer" style="text-decoration:none">🔗</a></td>');
+                         document.write('</tr>\n');
+                      }
+                </script>
+            </tbody>
+        </table>
+     </div>
+    </details>
+     </div>
+
+     <br>
+     <footer style="margin-bottom:-50px;">
+         <small>
+         <div class="subpage" style="height:50px">
+         <div class="same-line">
+             <div class="on-the-left">© University College London 2023-</div>
+             <div class="on-the-right">
+                 <a style="color: inherit"
+                     href="https://github.com/george-hall-ucl/portable-cellxgene"
+                     target="_blank"
+                     rel="noopener noreferrer">
+                        github.com/george-hall-ucl/portable-cellxgene
+                 </a>
+             </div>
+         </div>
+         </div>
+         </small>
+     </footer>
+</body>
+</html>

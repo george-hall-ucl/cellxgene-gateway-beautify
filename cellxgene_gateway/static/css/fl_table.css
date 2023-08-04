@@ -1,0 +1,107 @@
+/* Modified version of "Responsive Table HTML and CSS Only"
+ * (https://codepen.io/florantara/pen/dROvdb). Copyright Flor Antara 2023 and
+ * licensed under the MIT license (available
+ * https://blog.codepen.io/documentation/licensing/)
+ */
+
+/* Table Styles */
+
+.table-wrapper{
+    margin: 20px 0px 20px;
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px solid;
+    border-collapse: collapse;
+    max-width: 800px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow:5px 5px 10px #D3D3D3;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table thead {
+    font-size: large;
+}
+
+.fl-table thead th {
+    background: #FFF4CF;
+}
+
+
+/* .fl-table thead th:nth-child(odd) {
+    background: #BAE1FF;
+} */
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+    .fl-table {
+        display: block;
+        width: 100%;
+    }
+    .table-wrapper:before{
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        color: white;
+        padding: 0 0 10px;
+    }
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child{
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tbody tr:nth-child(odd) {
+        background: #F8F8F8;
+    }
+    .fl-table tr:nth-child(even) {
+        background: #8F8F8F;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+    .fl-table tr td:last-child {
+        border-right: 1px solid black;
+    }
+}

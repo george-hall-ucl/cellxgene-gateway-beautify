@@ -195,17 +195,22 @@ def portable_home(path=None):
         p_h.render_item_source(item_source, path) for item_source in sources
     ]  # will we need to make this async in the page???
     rendered_html += "\n".join(rendered_sources)
-    rendered_html += "</div>\n<br><div class='subpage'>"
+    rendered_html += "</div>\n<br><div class='subpage'>" + \
+                     "<p><center><h5><b>Notebooks</b></h5></p>"
 
-    all_nbs = glob.glob(env.cellxgene_data + "/rendered_notebooks/*.html")
+    nb_path = env.cellxgene_data + "/rendered_notebooks"
+    all_nbs = glob.glob(nb_path + "/*.html")
     if all_nbs:
         nb_links = [f"<a href=file:///{x}>{os.path.basename(x)}</a>" for x in all_nbs]
-        rendered_html += "<p><center><h5><b>Notebooks</b></h5></p>" + \
-                         "(right click → copy link → open a " + \
+        rendered_html += "(right click → copy link → open a " + \
                          "new tab → paste link)<br> <div class='table-wrapper'><table class='fl-table'>" + \
                          "<thead><th>📖</th></thead><tbody>" + \
-                         "".join([f"<tr><td>{x}</td></tr>" for x in (nb_links + nb_links)]) + \
-                         "</tbody></table></div></center></div><br>"
+                         "".join([f"<tr><td>{x}</td></tr>" for x in nb_links]) + \
+                         "</tbody></table></div>"
+    else:
+        rendered_html += "<p>None found.<br>Store as html files in " + \
+                         nb_path + ".</p><br>"
+    rendered_html += "</center></div><br>"
 
     resp = make_response(
         render_template(

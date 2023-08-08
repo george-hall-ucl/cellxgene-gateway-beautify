@@ -19,17 +19,16 @@ def render_annotations(item, item_source):
     url = flask_util.view_url(
         item_source.get_annotations_subpath(item), item_source.name
     )
-    annotations = (
-        ", ".join(
-            [
-                f"<a href='{CacheKey(item, item_source, a).view_url}/' "\
-                f"target='_blank' rel='noopener noreferrer'>{a.name}</a>"
-                for a in item.annotations
-            ]
-        )
+    annotations = ", ".join(
+        [
+            f"<a href='{CacheKey(item, item_source, a).view_url}/' "
+            f"target='_blank' rel='noopener noreferrer'>{a.name}</a>"
+            for a in item.annotations
+        ]
     )
 
     return annotations
+
 
 def render_new_annotations(item, item_source):
     url = flask_util.view_url(
@@ -39,14 +38,16 @@ def render_new_annotations(item, item_source):
 
 
 def render_item(item, item_source):
-    item_string = "<tr>"\
-            f"<td>{item.name}</td>"\
-            f"<td><a href='{ CacheKey(item, item_source).view_url }/' "\
-             "target='_blank' rel='noopener noreferrer'>"\
-             "No annotations</a></td>"\
-            f"<td>{render_new_annotations(item, item_source)}</td>"\
-            f"<td>{render_annotations(item, item_source)}</td>"\
-             "</tr>"
+    item_string = (
+        "<tr>"
+        f"<td>{item.name}</td>"
+        f"<td><a href='{ CacheKey(item, item_source).view_url }/' "
+        "target='_blank' rel='noopener noreferrer'>"
+        "No annotations</a></td>"
+        f"<td>{render_new_annotations(item, item_source)}</td>"
+        f"<td>{render_annotations(item, item_source)}</td>"
+        "</tr>"
+    )
     return item_string
 
 
@@ -56,16 +57,16 @@ def render_item_tree(item_tree, item_source):
         if item_tree.items
         else ""
     )
-    items = '<div class="table-wrapper">'\
-            '<table class="fl-table">'\
-            '<thead>'\
-            '<tr><th width="10%"></th><th width="10%">🙈</th>'\
-            '<th width="10%">✍️</th>'\
-            '<th>💾</th></tr>'\
-            '</thead>'\
-            '<tbody>' +\
-            items +\
-            '</tbody></table></div>'
+    items = (
+        '<div class="table-wrapper">'
+        '<table class="fl-table">'
+        "<thead>"
+        '<tr><th width="10%"></th><th width="10%">🙈</th>'
+        '<th width="10%">✍️</th>'
+        "<th>💾</th></tr>"
+        "</thead>"
+        "<tbody>" + items + "</tbody></table></div>"
+    )
     branches = (
         "\n".join([render_item_tree(b, item_source) for b in item_tree.branches])
         if item_tree.branches

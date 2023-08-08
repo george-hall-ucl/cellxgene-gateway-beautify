@@ -19,13 +19,15 @@ def render_annotations(item, item_source):
     url = flask_util.view_url(
         item_source.get_annotations_subpath(item), item_source.name
     )
-    annotations = ", ".join(
-        [
+    if item.annotations:
+        href_list = [
             f"<a href='{CacheKey(item, item_source, a).view_url}/' "
             f"target='_blank' rel='noopener noreferrer'>{a.name}</a>"
             for a in item.annotations
         ]
-    )
+        annotations = ", ".join(href_list)
+    else:
+        annotations = "No annotations present."
 
     return annotations
 

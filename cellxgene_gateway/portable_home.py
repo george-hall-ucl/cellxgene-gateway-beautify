@@ -69,11 +69,13 @@ def render_item_tree(item_tree, item_source):
         "</thead>"
         "<tbody>" + items + "</tbody></table></div>"
     )
+    items += f"<center>Location: {env.cellxgene_data}</center>"
     branches = (
         "\n".join([render_item_tree(b, item_source) for b in item_tree.branches])
         if item_tree.branches
         else ""
     )
+
     html = items + branches
     if item_tree.descriptor:
         descriptor = item_tree.descriptor.lstrip("/")

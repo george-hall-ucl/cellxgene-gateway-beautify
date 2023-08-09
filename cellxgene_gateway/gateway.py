@@ -215,7 +215,7 @@ def portable_home(path=None):
         )
     else:
         rendered_html += (
-            "<p>None found.<br>Store as html files in " + nb_path + ".</p><br>"
+            "<p>None found. Store as html files in " + nb_path + ".</p><br>"
         )
     rendered_html += "</center></div><br>"
 

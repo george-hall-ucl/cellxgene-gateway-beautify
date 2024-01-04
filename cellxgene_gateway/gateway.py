@@ -35,6 +35,7 @@ from cellxgene_gateway.filecrawl import render_item_source
 from cellxgene_gateway.process_exception import ProcessException
 from cellxgene_gateway.prune_process_cache import PruneProcessCache
 from cellxgene_gateway.util import current_time_stamp
+import cellxgene_gateway.portable_home as p_h
 
 app = Flask(__name__)
 
@@ -125,6 +126,7 @@ def favicon():
         mimetype="image/vnd.microsof.icon",
     )
 
+
 @app.route("/nibr.ico")
 def favicon_nibr():
     return send_from_directory(
@@ -156,29 +158,70 @@ def filecrawl(path=None):
         if source_name
         else item_sources
     )
-
-    rendered_html = "<div class='subpage'><p><center><h5><b>Datasets</b></h5></center></p>"
-
     # loop all data sources --
     rendered_sources = [
         render_item_source(item_source, path) for item_source in sources
     ]  # will we need to make this async in the page???
-    rendered_html += "\n".join(rendered_sources)
-    rendered_html += "</div>\n<br><div class='subpage'>"
-
-    all_nbs = glob.glob(env.cellxgene_data + "/rendered_notebooks/*.html")
-    if all_nbs:
-        nb_links = [f"<a href=file:///{x}>{os.path.basename(x)}</a>" for x in all_nbs]
-        rendered_html += "<p><center><h5><b>Notebooks</b></h5></p>" + \
-                         "(right click → copy link → open a " + \
-                         "new tab → paste link)<br> <div class='table-wrapper'><table class='fl-table'>" + \
-                         "<thead><th>📖</th></thead><tbody>" + \
-                         "".join([f"<tr><td>{x}</td></tr>" for x in (nb_links + nb_links)]) + \
-                         "</tbody></table></div></center></div><br>"
+    rendered_html = "\n".join(rendered_sources)
 
     resp = make_response(
         render_template(
             "filecrawl.html",
+            extra_scripts=get_extra_scripts(),
+            rendered_html=rendered_html,
+            path=path,
+        )
+    )
+    set_no_cache(resp)
+    return resp
+
+
+@app.route("/portable_home.html")
+@app.route("/portable_home/<path:path>")
+def portable_home(path=None):
+    source_name = request.args.get("source")
+    sources = (
+        filter(
+            lambda x: x.name == urllib.parse.unquote_plus(source_name),
+            item_sources,
+        )
+        if source_name
+        else item_sources
+    )
+
+    rendered_html = (
+        "<div class='subpage'><p><center><h5><b>Datasets</b></h5></center></p>"
+    )
+
+    # loop all data sources --
+    rendered_sources = [
+        p_h.render_item_source(item_source, path) for item_source in sources
+    ]  # will we need to make this async in the page???
+    rendered_html += "\n".join(rendered_sources)
+    rendered_html += (
+        "</div>\n<br><div class='subpage'>" + "<p><center><h5><b>Notebooks</b></h5></p>"
+    )
+
+    nb_path = env.cellxgene_data + "/rendered_notebooks"
+    all_nbs = glob.glob(nb_path + "/*.html")
+    if all_nbs:
+        nb_links = [f"<a href=file:///{x}>{os.path.basename(x)}</a>" for x in all_nbs]
+        rendered_html += (
+            "(right click → copy link → open a "
+            + "new tab → paste link)<br> <div class='table-wrapper'><table class='fl-table'>"
+            + "<thead><th>📖</th></thead><tbody>"
+            + "".join([f"<tr><td>{x}</td></tr>" for x in nb_links])
+            + "</tbody></table></div>"
+        )
+    else:
+        rendered_html += (
+            "<p>None found. Store as html files in " + nb_path + ".</p><br>"
+        )
+    rendered_html += "</center></div><br>"
+
+    resp = make_response(
+        render_template(
+            "portable_home.html",
             extra_scripts=get_extra_scripts(),
             rendered_html=rendered_html,
             path=path,

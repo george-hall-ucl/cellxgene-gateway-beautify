@@ -140,7 +140,7 @@ class CacheEntry:
         elif self.status == CacheEntryStatus.loading:
             launch_time = datetime.datetime.fromtimestamp(self.launchtime)
             return render_template(
-                "loading.html",
+                "portable_loading.html",
                 launchtime=launch_time,
                 all_output=self.all_output,
             )

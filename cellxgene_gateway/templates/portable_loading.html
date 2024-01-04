@@ -1,0 +1,92 @@
+<!--
+ Copyright 2019 Novartis Institutes for BioMedical Research Inc. Licensed
+ under the Apache License, Version 2.0 (the "License"); you may not use
+ this file except in compliance with the License. You may obtain a copy
+ of the License at http://www.apache.org/licenses/LICENSE-2.0. Unless
+ required by applicable law or agreed to in writing, software distributed
+ under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+ OR CONDITIONS OF ANY KIND, either express or implied. See the License for
+ the specific language governing permissions and limitations under the License.
+-->
+
+<html>
+<head>
+     <title>Portable-CELLxGENE | Loading</title>
+     <link rel="icon" type="image/png" href="favicon.png">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap_min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/beautified.css') }}">
+
+     <meta http-equiv="refresh" content="5">
+</head>
+<body>
+
+    <div style = "position: relative; min-height: 100vh;">
+    <div style = "padding-bottom: 2.5rem;">
+    <div class="subpage" style="padding-left:20px; padding-right:20px; padding-top:25px; margin-top:-25px; margin-left:5%; margin-right:5%; background-color:#FFD761; border:2px solid black;">
+        <center>
+        <h4><b>Portable-CELLxGENE</b></h4><br>
+        <h6 style="margin-top:-20px;">
+        Easy sharing of datasets.
+        <a style="color: inherit"
+           href="https://github.com/george-hall-ucl/portable-cellxgene"
+           target="_blank"
+           rel="noopener noreferrer">
+            github.com/george-hall-ucl/portable-cellxgene</a>.
+        </h6>
+    <hr style="clear:both; border-width:0px;"/>
+        </center>
+    </div>
+    <br>
+
+     <div class="subpage">
+     <h5>Dataset loading<span id='dots'></span></h3>
+     <p>
+          The page will refresh every five seconds.
+     </p>
+
+     <br>     
+     <details>
+     <summary>Expand for loading progress</summary>
+     <h4>Output:</h4>
+     <pre>{{ all_output }}</pre>
+     <p>
+          Launch Time: <span id="launch_time"> {{ launchtime.isoformat(' ') }} </span>
+     </p>
+     </details>
+     <br>
+
+     <script>
+          var count = 0;
+          window.setInterval(function(){
+               var dots = document.getElementById('dots');
+               dots.textContent = dots.textContent + '.';
+               if (count++ > 5) {
+                    window.location.reload();
+               }
+          }, 1000);
+     </script>
+     </div>
+
+     <br>
+    </div>
+     <footer style="position: absolute; bottom: 0; width: 100%; height: 2.5rem;">
+         <small>
+         <div class="subpage" style="height:50px">
+         <div class="same-line">
+             <div class="on-the-left">© University College London 2023-</div>
+             <div class="on-the-center">v1.3.0</div>
+             <div class="on-the-right">
+                 <a style="color: inherit"
+                     href="https://github.com/george-hall-ucl/portable-cellxgene"
+                     target="_blank"
+                     rel="noopener noreferrer">
+                        github.com/george-hall-ucl/portable-cellxgene
+                 </a>
+             </div>
+         </div>
+         </div>
+         </small>
+     </footer>
+    </div>
+</body>
+</html>

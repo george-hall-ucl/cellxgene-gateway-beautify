@@ -53,9 +53,9 @@ setup(
     packages=find_packages(),
     package_data={
         "cellxgene_gateway": [
-            "static/css/homepagestyle.css",
-            "static/js/annotation.js",
-            "static/nibr.ico",
+            "static/css/*.css",
+            "static/js/*.js",
+            "static/favicon.ico",
             "templates/*.html",
         ]
     },

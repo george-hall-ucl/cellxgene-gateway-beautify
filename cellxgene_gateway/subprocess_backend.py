@@ -9,16 +9,11 @@
 
 import logging
 import subprocess
-
-from flask_api import status
+from http import HTTPStatus
 
 from cellxgene_gateway.cache_entry import CacheEntryStatus
 from cellxgene_gateway.dir_util import make_annotations
-from cellxgene_gateway.env import (
-    cellxgene_args,
-    enable_annotations,
-    enable_backed_mode,
-)
+from cellxgene_gateway.env import cellxgene_args, enable_annotations, enable_backed_mode
 from cellxgene_gateway.process_exception import ProcessException
 
 logger = logging.getLogger(__name__)
@@ -80,10 +75,10 @@ class SubprocessBackend:
                     or "Could not open file" in stderr
                 ):
                     message = "File was invalid."
-                    http_status = status.HTTP_400_BAD_REQUEST
+                    http_status = HTTPStatus.BAD_REQUEST
                 else:
                     message = "Cellxgene failed to launch dataset."
-                    http_status = status.HTTP_500_INTERNAL_SERVER_ERROR
+                    http_status = HTTPStatus.INTERNAL_SERVER_ERROR
 
                 cache_entry.status = CacheEntryStatus.error
                 cache_entry.set_error(message, stderr, http_status)

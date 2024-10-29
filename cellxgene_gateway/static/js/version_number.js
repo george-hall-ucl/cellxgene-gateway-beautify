@@ -1,1 +1,1 @@
-document.write('v1.4.0');
+document.write('v1.5.0');

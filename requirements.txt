@@ -1,4 +1,4 @@
-cellxgene
+cellxgene @ https://github.com/george-hall-ucl/cellxgene-noJIT
 flask
 werkzeug
 psutil
